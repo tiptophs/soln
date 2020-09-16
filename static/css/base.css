@@ -1,0 +1,24 @@
+/*公用基础css样式*/
+
+/*清除外边框线条*/
+* {
+    outline: none;
+    cursor: default;
+}
+
+/*清除浮动*/
+.clearfix:after {
+    content: '';
+    display: block;
+    overflow: hidden;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clearfix {
+    *zoom: 1;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0px;
+}
