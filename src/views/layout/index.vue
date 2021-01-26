@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: tiptop
- * @Date: 2020-07-19 21:58:36
- * @LastEditors: tiptop
- * @LastEditTime: 2020-09-13 22:41:06
--->
 <template>
   <div class="layout">
     <el-container class="layout-container">

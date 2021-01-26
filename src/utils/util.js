@@ -1,5 +1,5 @@
 /*
- * @Descripttion:
+ * @Descripttion: 工具类函数
  * @version:
  * @Author: tiptop
  * @Date: 2020-09-13 14:03:05

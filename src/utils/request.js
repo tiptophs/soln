@@ -1,12 +1,3 @@
-/*
- * @Descripttion:
- * @version:
- * @Author: tiptop
- * @Date: 2020-07-27 20:33:40
- * @LastEditors: tiptop
- * @LastEditTime: 2020-09-12 22:18:14
- */
-
 import axios from "axios";
 import { Message, MessageBox } from "element-ui";
 import store from "@/store";
@@ -15,8 +6,13 @@ import qs from "qs";
 
 // 请求map对应表
 const mapApiRequest = {
-  getToolList: "index/tool/getToolList",
-  getToolItem: "index/tool/getToolItem",
+  getToolList: "index/tool/getToolList", // 获取工具分类列表
+  addTool: "index/tool/addTools", // 添加工具分类
+  getToolItem: "index/tool/getToolItem", // 获取分类下内容
+  addItemTool: "index/tool/addToolItem", // 添加分类下内容
+  addTag: "index/Tooltag/addTag", // 添加分类下的标签
+  getToolTags: "index/Tooltag/getTags", // 获取分类下的标签
+  register: "/index/login/register", // 注册
 };
 
 // 创建一个axios实例

@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: tiptop
- * @Date: 2020-07-19 15:29:14
- * @LastEditors: tiptop
- * @LastEditTime: 2020-07-19 22:17:45
--->
 <template>
   <div id="app">
     <router-view />

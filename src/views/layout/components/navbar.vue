@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: tiptop
- * @Date: 2020-07-19 22:51:45
- * @LastEditors: tiptop
- * @LastEditTime: 2020-09-13 20:45:08
--->
 <template>
   <div class="header">
     <el-menu

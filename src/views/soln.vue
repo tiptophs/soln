@@ -15,8 +15,9 @@
           {{ toolTitle }}
         </div>
         <div class="operation">
-          <el-button class="cus-button" icon="el-icon-edit"></el-button>
-          <el-button class="cus-button" icon="el-icon-delete"></el-button>
+          <i class="el-icon-edit cus-button"></i>
+          <i class="el-icon-delete cus-button"></i>
+          <i class="el-icon-lollipop cus-button" @click="showAddTag = true"></i>
         </div>
       </div>
 
@@ -27,19 +28,13 @@
         >
       </el-divider>
       <div class="soln-tag">
-        <el-tag>爱豆</el-tag>
-        <el-tag type="success">webpack</el-tag>
-        <el-tag type="info">黑历史</el-tag>
-        <el-tag type="warning">丫丫</el-tag>
-        <el-tag type="danger">空气炮</el-tag>
-        <el-tag type="success">webpack</el-tag>
-        <el-tag type="info">黑历史</el-tag>
-        <el-tag type="warning">丫丫</el-tag>
-        <el-tag type="danger">空气炮</el-tag>
-        <el-tag type="success">webpack</el-tag>
-        <el-tag type="info">黑历史</el-tag>
-        <el-tag type="warning">丫丫</el-tag>
-        <el-tag type="danger">空气炮</el-tag>
+        <tag 
+          :toolType="currentType" 
+          :showAdd="showAddTag" 
+          @destoryAddTag="showAddTag = false"
+          @toolTags="toolTags"
+        >
+        </tag>
       </div>
     </div>
 
@@ -50,14 +45,15 @@
         <el-button class="item-btn" icon="el-icon-search" circle></el-button>
         <el-button
           class="item-btn"
-          type="primary"
-          icon="el-icon-edit"
+          type="success"
+          icon="el-icon-plus"
           circle
+          @click="showAddItem = true"
         ></el-button>
         <el-button
           class="item-btn"
-          type="success"
-          icon="el-icon-check"
+          type="primary"
+          icon="el-icon-edit"
           circle
         ></el-button>
         <el-button
@@ -81,33 +77,61 @@
       </div>
       <!--主内容展示区域-->
       <div class="soln-container-right clearfix">
-        <card />
-        <card />
-        <card />
-        <card />
+        <template v-for="item in cardList">
+          <card :linkInfo="item" 
+            :key="item.sid" 
+            :toolTags="tagList" 
+            :isActive="selectCard.sid === item.sid"
+            @nowCard="getSelectCard"  
+          />
+        </template>
       </div>
+
+      <!--创建链接组件-->
+      <addlinkitem 
+        :showItem="showAddItem"
+        :toolTags="tagList"
+        :toolType="toolInfo.type"
+        :type="currentType"
+        @cancel="showAddItem = false"
+      >
+      </addlinkitem>
     </div>
   </div>
 </template>
 
 <script>
 import card from "@/components/cards/index.vue";
+import tag from "@/components/tags/index.vue";
 import { getData } from "@/utils/request.js";
 import { bus } from "@/utils/util.js";
-
+import addlinkitem from "@/components/link/linkitem/index.vue"
 export default {
   components: {
     card,
+    tag,
+    addlinkitem,
   },
   data() {
     return {
       cardList: [],
       toolTitle: "",
+      toolInfo: {
+        type: []
+      },
+      currentType: "",
+      showAddTag: false,
+      showAddItem: false,
+      tagList:[],
+      selectCard: {
+        sid: '',
+      },
     };
   },
   watch: {
     $route: {
       handler(n) {
+        this.currentType = n.query.type;
         this.getCardList(n.query.type);
       },
     },
@@ -124,6 +148,7 @@ export default {
       getData("getToolItem", { type }).then((res) => {
         this.cardList = res.value.tools;
         this.toolTitle = res.value.info.title;
+        this.toolInfo = res.value.info;
       });
     },
     /** 验证type是否存在 */
@@ -136,10 +161,18 @@ export default {
       }
       return type;
     },
+    // 获取类型下所有标签
+    toolTags(tagList) {
+      this.tagList = tagList;
+    },
+    getSelectCard(card){
+      this.selectCard = card;
+    }
   },
   mounted() {
     bus.$on("toolList", (tools) => {
       const type = this.checkType(tools);
+      this.currentType = type;
       this.getCardList(type);
     });
   },
@@ -163,8 +196,11 @@ export default {
   line-height: 29px;
 }
 .cus-button {
-  padding: 6px 12px;
-  margin-left: 5px;
+  padding: 6px 3px;
+  margin-left: 3px;
+  color: darkcyan;
+  cursor: pointer;
+  font-size: 17px;
 }
 .cus-divider {
   margin: 6px 0px 18px 0px;
@@ -196,6 +232,6 @@ export default {
 
 /**标签部分样式 */
 .soln-tag {
-  padding-bottom: 32px;
+  padding-bottom: 12px;
 }
 </style>

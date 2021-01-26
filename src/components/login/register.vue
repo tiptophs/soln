@@ -137,7 +137,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // 请求数据
-          postData("/index/login/register", this.ruleForm).then((data) => {
+          postData("register", this.ruleForm).then((data) => {
             if (data.status) {
               this.$message({
                 message: "账号创建成功，马上去登陆吧...",

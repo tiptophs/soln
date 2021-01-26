@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: tiptop
- * @Date: 2020-07-19 23:01:32
- * @LastEditors: tiptop
- * @LastEditTime: 2020-09-13 21:45:44
--->
 <template>
   <div class="sidebar">
     <el-menu
@@ -55,7 +47,7 @@
 </template>
 
 <script>
-import ctag from "@/components/link/ctags/index.vue";
+import ctag from "@/components/link/category/index.vue";
 import { getData } from "@/utils/request.js";
 import { bus } from "@/utils/util.js";
 

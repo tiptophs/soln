@@ -1,15 +1,7 @@
-/*
- * @Descripttion:
- * @version:
- * @Author: tiptop
- * @Date: 2020-07-19 15:29:14
- * @LastEditors: tiptop
- * @LastEditTime: 2020-09-12 23:34:22
- */
-
 import Vue from "vue";
 import Router from "vue-router";
 import Layout from "@/views/layout";
+
 // 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -66,7 +58,6 @@ router.beforeEach((to, from, next) => {
     next();
   } else {
     const token = localStorage.getItem("Authorization");
-
     if (token === "null" || token === "") {
       next("/login");
     } else {
